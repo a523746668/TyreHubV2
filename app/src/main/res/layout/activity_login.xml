@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".activiry.LoginActivity">
+
+    <com.example.tyrehubv2.View.ColorFiltImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/LoginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/TxTLogin"
+        android:textColor="@color/colorBlack"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"></TextView>
+
+    <ImageView
+        android:id="@+id/IVPhone"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="30dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/username"
+        app:layout_constraintBottom_toBottomOf="@id/ETPhone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ETPhone"></ImageView>
+
+    <EditText
+        android:id="@+id/ETPhone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+        android:hint="@string/TxTPhoneTs"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGray"
+        app:layout_constraintLeft_toRightOf="@id/IVPhone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LoginText"
+        android:inputType="text"
+        ></EditText>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="2px"
+        android:background="@color/colorGray"
+        app:layout_constraintLeft_toLeftOf="@id/IVPhone"
+        app:layout_constraintRight_toRightOf="@id/ETPhone"
+        app:layout_constraintTop_toBottomOf="@id/ETPhone"></TextView>
+
+
+    <ImageView
+        android:id="@+id/IVPassword"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="30dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/password"
+        app:layout_constraintBottom_toBottomOf="@id/ETPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ETPassword"></ImageView>
+
+    <EditText
+        android:id="@+id/ETPassword"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+        android:hint="@string/TxTPasswordTs"
+        android:inputType="textPassword"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGray"
+        app:layout_constraintLeft_toRightOf="@id/IVPassword"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ETPhone"
+
+        ></EditText>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="2px"
+        android:background="@color/colorGray"
+        app:layout_constraintLeft_toLeftOf="@id/IVPassword"
+        app:layout_constraintRight_toRightOf="@id/ETPassword"
+        app:layout_constraintTop_toBottomOf="@id/ETPassword"></TextView>
+
+    <TextView
+        android:id="@+id/TVLoginBtn"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorYellow"
+        android:gravity="center"
+        android:text="@string/TxTLogin"
+        android:textColor="@color/colorWhite"
+        android:textSize="16dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintLeft_toLeftOf="@id/IVPhone"
+        app:layout_constraintRight_toRightOf="@id/ETPhone"
+        app:layout_constraintTop_toBottomOf="@id/ETPassword"></TextView>
+
+    <com.example.tyrehubv2.View.ColorFilterTextView
+        android:id="@+id/TVRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/TxTRegister"
+        android:textSize="14dp"
+        app:layout_constraintLeft_toLeftOf="@id/TVLoginBtn"
+        app:layout_constraintTop_toBottomOf="@id/TVLoginBtn"
+
+        ></com.example.tyrehubv2.View.ColorFilterTextView>
+
+    <com.example.tyrehubv2.View.ColorFilterTextView
+        android:id="@+id/TVForget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/TxTForgetNum"
+        android:textSize="14dp"
+        app:layout_constraintRight_toRightOf="@id/TVLoginBtn"
+        app:layout_constraintTop_toBottomOf="@id/TVLoginBtn"
+
+        ></com.example.tyrehubv2.View.ColorFilterTextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

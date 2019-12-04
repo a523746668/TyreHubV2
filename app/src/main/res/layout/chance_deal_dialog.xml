@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorTransparentAll">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintWidth_percent="0.8"
+       app:layout_constraintHeight_percent="0.6"
+       android:background="@drawable/white_rect_bg"
+       android:paddingBottom="10dp"
+       >
+       <androidx.constraintlayout.widget.Guideline
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           app:layout_constraintGuide_percent="0.35"
+           android:id="@+id/line2"
+           ></androidx.constraintlayout.widget.Guideline>
+
+
+       <androidx.constraintlayout.widget.Guideline
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           app:layout_constraintGuide_percent="0.05"
+           android:id="@+id/line1"
+           />
+
+       <androidx.constraintlayout.widget.Guideline
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           app:layout_constraintGuide_percent="0.95"
+           android:id="@+id/line3"
+           >
+
+       </androidx.constraintlayout.widget.Guideline>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/TVTitle"
+          android:text="@string/TxTChanceDeal"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_marginTop="5dp"
+          android:textSize="@dimen/ChanceDialogTv"
+          android:textColor="@color/colorBlack"
+
+          ></TextView>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintLeft_toLeftOf="@id/line1"
+          app:layout_constraintBottom_toBottomOf="parent"
+          android:text="@string/TxTCancel"
+          style="@style/tv_click_2"
+          android:id="@+id/TVCancel"
+          android:foreground="?android:attr/selectableItemBackground"
+          ></TextView>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           android:text="@string/TxTUpdate"
+           style="@style/tv_click_2"
+           android:id="@+id/TVUpdate"
+
+           ></TextView>
+
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:foreground="?android:attr/selectableItemBackground"
+           app:layout_constraintRight_toRightOf="@id/line3"
+           app:layout_constraintBottom_toBottomOf="parent"
+           android:text="@string/TxTSure"
+           style="@style/tv_click_2"
+           android:id="@+id/TVSure"
+           ></TextView>
+
+     <Spinner
+         android:layout_width="0dp"
+         android:layout_height="40dp"
+         android:id="@+id/SpStatus"
+         app:layout_constraintTop_toBottomOf="@id/TVTitle"
+         android:layout_marginTop="20dp"
+         app:layout_constraintLeft_toLeftOf="@id/line2"
+         app:layout_constraintRight_toRightOf="@id/line3"
+         android:spinnerMode="dropdown"
+         android:dropDownVerticalOffset="5dp"
+
+         ></Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/line1"
+        app:layout_constraintRight_toRightOf="@id/line2"
+        android:text="@string/TxTChanceStatus"
+        android:textColor="@color/colorYellow"
+        android:textSize="@dimen/ChanceDialogTv"
+       app:layout_constraintTop_toTopOf="@id/SpStatus"
+        app:layout_constraintBottom_toBottomOf="@id/SpStatus"
+        ></TextView>
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    >
+
+    <TextView
+        android:layout_width="@dimen/CircleHeight"
+        android:layout_height="@dimen/CircleHeight"
+        android:background="@drawable/redcircle"
+        android:id="@+id/TVCircle1"
+        ></TextView>
+    <TextView
+        android:layout_width="@dimen/CircleHeight"
+        android:layout_height="@dimen/CircleHeight"
+        android:background="@drawable/redcircle"
+        android:id="@+id/TVCircle2"
+        ></TextView>
+    <TextView
+        android:layout_width="@dimen/CircleHeight"
+        android:layout_height="@dimen/CircleHeight"
+        android:background="@drawable/redcircle"
+        android:id="@+id/TVCircle3"
+        ></TextView>
+    <TextView
+        android:layout_width="@dimen/CircleHeight"
+        android:layout_height="@dimen/CircleHeight"
+        android:background="@drawable/redcircle"
+        android:id="@+id/TVCircle4"
+        ></TextView>
+
+</LinearLayout>

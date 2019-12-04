@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activiry.MainActivity"
+    android:background="@color/colorWhite"
+    >
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/LoginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/TxTLogin"
+        android:textColor="@color/colorBlack"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"></TextView>
+
+    <TextView
+        android:id="@+id/SelectTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/TxTSelectTS"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LoginText"
+       android:textColor="@color/colorBlack"
+        ></TextView>
+
+    <ImageView
+        android:id="@+id/IVMerchant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/shanghu"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SelectTXT"></ImageView>
+
+    <ImageView
+        android:id="@+id/IVManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/dianzhang"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SelectTXT"></ImageView>
+
+
+    <ImageView
+        android:id="@+id/IVStaff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/dianyuan"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SelectTXT"></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/TxTMerchant"
+        app:layout_constraintLeft_toLeftOf="@id/IVMerchant"
+        app:layout_constraintRight_toRightOf="@id/IVMerchant"
+        app:layout_constraintTop_toBottomOf="@id/IVMerchant"
+        android:id="@+id/TxTMerchant"
+        android:textColor="@color/colorBlack"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/TxTManager"
+        app:layout_constraintLeft_toLeftOf="@id/IVManager"
+        app:layout_constraintRight_toRightOf="@id/IVManager"
+        app:layout_constraintTop_toBottomOf="@id/IVManager"
+        android:id="@+id/TxTManager"
+        android:textColor="@color/colorBlack"
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/TxTManager"
+        app:layout_constraintLeft_toLeftOf="@id/IVStaff"
+        app:layout_constraintRight_toRightOf="@id/IVStaff"
+        app:layout_constraintTop_toBottomOf="@id/IVStaff"
+        android:id="@+id/TxTStaff"
+        android:textColor="@color/colorBlack"
+        ></TextView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
