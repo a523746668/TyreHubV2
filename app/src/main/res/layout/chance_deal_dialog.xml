@@ -13,10 +13,26 @@
        app:layout_constraintTop_toTopOf="parent"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintWidth_percent="0.8"
-       app:layout_constraintHeight_percent="0.6"
+       app:layout_constraintHeight_percent="0.55"
        android:background="@drawable/white_rect_bg"
-       android:paddingBottom="10dp"
+       android:paddingBottom="15dp"
        >
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/GroupFinish"
+            app:constraint_referenced_ids="ETPrice,TVPrice,TVTransferTime,TVTransferTimeLeft"
+            android:visibility="gone"
+            ></androidx.constraintlayout.widget.Group>
+       <androidx.constraintlayout.widget.Group
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/GroupTrack"
+           app:constraint_referenced_ids="TVIntent,TVIntentLeft"
+
+           ></androidx.constraintlayout.widget.Group>
+
        <androidx.constraintlayout.widget.Guideline
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -102,8 +118,7 @@
          app:layout_constraintLeft_toLeftOf="@id/line2"
          app:layout_constraintRight_toRightOf="@id/line3"
          android:spinnerMode="dropdown"
-         android:dropDownVerticalOffset="5dp"
-
+         android:dropDownVerticalOffset="2dp"
          ></Spinner>
 
     <TextView
@@ -114,10 +129,193 @@
         android:text="@string/TxTChanceStatus"
         android:textColor="@color/colorYellow"
         android:textSize="@dimen/ChanceDialogTv"
-       app:layout_constraintTop_toTopOf="@id/SpStatus"
+        app:layout_constraintTop_toTopOf="@id/SpStatus"
         app:layout_constraintBottom_toBottomOf="@id/SpStatus"
         ></TextView>
 
+     <EditText
+         android:layout_width="0dp"
+         android:layout_height="32dp"
+         android:layout_marginHorizontal="3dp"
+         app:layout_constraintLeft_toLeftOf="@id/line2"
+         app:layout_constraintRight_toRightOf="@id/line3"
+         app:layout_constraintTop_toBottomOf="@id/SpStatus"
+         android:background="@drawable/graystroke"
+         android:id="@+id/EtArea"
+         android:layout_marginTop="5dp"
+         ></EditText>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="@id/line1"
+           app:layout_constraintRight_toRightOf="@id/line2"
+           android:textColor="@color/colorYellow"
+           android:textSize="@dimen/ChanceDialogTv"
+           app:layout_constraintTop_toTopOf="@id/EtArea"
+           app:layout_constraintBottom_toBottomOf="@id/EtArea"
+           android:text="@string/TxTDutyArea"
+
+           ></TextView>
+
+       <Spinner
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:id="@+id/SpDealMan"
+           app:layout_constraintTop_toBottomOf="@id/EtArea"
+           app:layout_constraintLeft_toLeftOf="@id/line2"
+           app:layout_constraintRight_toRightOf="@id/line3"
+           android:spinnerMode="dropdown"
+           android:dropDownVerticalOffset="2dp"
+           android:layout_marginTop="10dp"
+           ></Spinner>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="@id/line1"
+           app:layout_constraintRight_toRightOf="@id/line2"
+           android:textColor="@color/colorYellow"
+           android:textSize="@dimen/ChanceDialogTv"
+           app:layout_constraintTop_toTopOf="@id/SpDealMan"
+           app:layout_constraintBottom_toBottomOf="@id/SpDealMan"
+           android:text="@string/TxTDealMan"
+           ></TextView>
+
+       <Spinner
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:id="@+id/SpResult"
+           app:layout_constraintTop_toBottomOf="@id/SpDealMan"
+           app:layout_constraintLeft_toLeftOf="@id/line2"
+           app:layout_constraintRight_toRightOf="@id/line3"
+           android:spinnerMode="dropdown"
+           android:dropDownVerticalOffset="2dp"
+           ></Spinner>
+
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="@id/line1"
+           app:layout_constraintRight_toRightOf="@id/line2"
+           android:textColor="@color/colorYellow"
+           android:textSize="@dimen/ChanceDialogTv"
+           app:layout_constraintTop_toTopOf="@id/SpResult"
+           app:layout_constraintBottom_toBottomOf="@id/SpResult"
+           android:text="@string/TxTDealResult"
+           ></TextView>
+
+
+       <Spinner
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:id="@+id/SpContent"
+           app:layout_constraintTop_toBottomOf="@id/SpResult"
+           app:layout_constraintLeft_toLeftOf="@id/line2"
+           app:layout_constraintRight_toRightOf="@id/line3"
+           android:spinnerMode="dropdown"
+           android:dropDownVerticalOffset="2dp"
+           ></Spinner>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="@id/line1"
+           app:layout_constraintRight_toRightOf="@id/line2"
+           android:textColor="@color/colorYellow"
+           android:textSize="@dimen/ChanceDialogTv"
+           app:layout_constraintTop_toTopOf="@id/SpContent"
+           app:layout_constraintBottom_toBottomOf="@id/SpContent"
+           android:text="@string/TxTTransformContent"
+           ></TextView>
+
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="32dp"
+           android:layout_marginHorizontal="3dp"
+           android:id="@+id/TVIntent"
+           app:layout_constraintTop_toBottomOf="@id/SpContent"
+           app:layout_constraintLeft_toLeftOf="@id/line2"
+           app:layout_constraintRight_toRightOf="@id/line3"
+           android:foreground="?android:attr/selectableItemBackground"
+           android:focusable="true"
+           android:clickable="true"
+           android:background="@color/colorGray"
+           android:textColor="@color/colorBlack"
+           android:hint="@string/TxTPleaseSelectTime"
+           android:gravity="center"
+           ></TextView>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="@id/line1"
+           app:layout_constraintRight_toRightOf="@id/line2"
+           android:textColor="@color/colorYellow"
+           android:textSize="@dimen/ChanceDialogTv"
+           app:layout_constraintTop_toTopOf="@id/TVIntent"
+           app:layout_constraintBottom_toBottomOf="@id/TVIntent"
+           android:text="@string/TxTTransformContent"
+           android:id="@+id/TVIntentLeft"
+           ></TextView>
+
+
+
+       <EditText
+           android:layout_width="0dp"
+           android:layout_height="32dp"
+           android:id="@+id/ETPrice"
+           android:layout_marginHorizontal="3dp"
+           app:layout_constraintTop_toBottomOf="@id/SpContent"
+           app:layout_constraintLeft_toLeftOf="@id/line2"
+           app:layout_constraintRight_toRightOf="@id/line3"
+           android:background="@drawable/graystroke"
+           android:text="0"
+           ></EditText>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="@id/line1"
+           app:layout_constraintRight_toRightOf="@id/line2"
+           android:textColor="@color/colorYellow"
+           android:textSize="@dimen/ChanceDialogTv"
+           app:layout_constraintTop_toTopOf="@id/ETPrice"
+           app:layout_constraintBottom_toBottomOf="@id/ETPrice"
+           android:text="@string/TxTTransformPrice"
+           android:id="@+id/TVPrice"
+           ></TextView>
+
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="32dp"
+           android:layout_marginHorizontal="3dp"
+           android:id="@+id/TVTransferTime"
+           app:layout_constraintTop_toBottomOf="@id/ETPrice"
+           app:layout_constraintLeft_toLeftOf="@id/line2"
+           app:layout_constraintRight_toRightOf="@id/line3"
+           android:foreground="?android:attr/selectableItemBackground"
+           android:focusable="true"
+           android:clickable="true"
+           android:background="@color/colorGray"
+           android:textColor="@color/colorBlack"
+           android:hint="@string/TxTPleaseSelectTime"
+           android:gravity="center"
+           android:layout_marginTop="5dp"
+           ></TextView>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="@id/line1"
+           app:layout_constraintRight_toRightOf="@id/line2"
+           android:textColor="@color/colorYellow"
+           android:textSize="@dimen/ChanceDialogTv"
+           app:layout_constraintTop_toTopOf="@id/TVTransferTime"
+           app:layout_constraintBottom_toBottomOf="@id/TVTransferTime"
+           android:text="@string/TxTTransformTime"
+           android:id="@+id/TVTransferTimeLeft"
+           ></TextView>
 
    </androidx.constraintlayout.widget.ConstraintLayout>
 

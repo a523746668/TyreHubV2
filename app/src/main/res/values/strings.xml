@@ -56,5 +56,18 @@
     <string name="TxTDealResult">处理结果</string>
     <string name="TxTTransformContent">转化内容</string>
     <string name="TxTTransformIntent">转化意向</string>
+    <string name="TxTTransformTime">转化时间</string>
     <string name="TxTTransformPrice">转化金额</string>
+    <string name="TxTPleaseSelectTime">请选择时间</string>
+    <string name="TxTIntention">有意向</string>
+    <string name="TxTTransformed">已转化</string>
+    <string name="TxTDisagree">车主不同意</string>
+    <string name="TxTTire1">轮胎1个</string>
+    <string name="TxTTire2">轮胎2个</string>
+    <string name="TxTTire3">轮胎3个</string>
+    <string name="TxTTire4">轮胎4个</string>
+    <string name="TxTAlignment">四轮定位</string>
+    <string name="TxTBalance">动平衡</string>
+    <string name="TxTOther">其他</string>
+
 </resources>

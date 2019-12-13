@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activiry.SettingActivity"></activity>
-        <activity android:name=".activiry.ChanceActivity" />
+        <activity android:name=".activiry.ChanceActivity"
+             android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".activiry.BaseActivity" />
         <activity android:name=".activiry.HomePageActivity" />
         <activity android:name=".activiry.LoginActivity" />
