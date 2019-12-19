@@ -150,6 +150,16 @@ public class ChanceDialogPresenter {
         return  strs;
     }
 
+    public void refreshItemList(ChanceDealDialog.Item data, List<ChanceDealDialog.Item> list){
+           for(ChanceDealDialog.Item item:list){
+               if(item.value.equalsIgnoreCase(data.value)){
+                   item.selected=true;
+               }else {
+                   item.selected=false;
+               }
+           }
+
+    }
 
 
 }

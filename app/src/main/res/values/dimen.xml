@@ -2,5 +2,6 @@
 <resources>
   <dimen name="ChanceRecyclerTv">12dp</dimen>
   <dimen name="CircleHeight">10dp</dimen>
-  <dimen name="ChanceDialogTv">14dp</dimen>
+  <dimen name="ChanceDialogTv">12dp</dimen>
+  <dimen name="ChanceDialoglineH">32dp</dimen>
 </resources>

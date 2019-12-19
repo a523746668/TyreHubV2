@@ -58,6 +58,12 @@ public class ChanceActivity extends BaseActivity implements ChanceView {
         initRecyclerView();
         mPresenter = new ChancePresenter(this, ChanceActivity.this);
         mPresenter.getChanceData(mStatus);
+        TitleBar.setBackClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initRecyclerView() {

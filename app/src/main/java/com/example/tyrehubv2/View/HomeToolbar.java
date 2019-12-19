@@ -29,7 +29,7 @@ public class HomeToolbar extends Toolbar {
 
     private Button button;
 
-    private ImageView imageView;
+    private ColorFiltImageView imageView;
 
 
 
@@ -94,6 +94,7 @@ public class HomeToolbar extends Toolbar {
 
             tv = (TextView) view.findViewById(R.id.toolbar_title);
 
+            imageView=view.findViewById(R.id.IvBack);
             LayoutParams params=new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL);
 
             addView(view,params);
@@ -251,6 +252,11 @@ public class HomeToolbar extends Toolbar {
         button.setOnClickListener(li);
 
     }
+
+
+   public void setBackClickListener(OnClickListener listener){
+        imageView.setOnClickListener(listener);
+   }
 
     public void setrighticon(int resouce){
 

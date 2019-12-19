@@ -15,6 +15,13 @@
         <item name="android:textSize">@dimen/ChanceDialogTv</item>
     </style>
 
+    <!--带点击效果的style -->
+    <style name="tv_click">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
     <style name="tv_click_2">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/ChanceDialogTv</item>
