@@ -9,4 +9,5 @@ public class Urls {
      public static String Chance_Dialog_DealMan_Url=Base_Url+"api/chance/staff/";
      public static String Chance_Dialog_DealData_Url=Base_Url+"api/chance/statu/";
      public static String Chance_Dialog_DealChance_Url=Base_Url+"api/chance/handel/";
+
 }

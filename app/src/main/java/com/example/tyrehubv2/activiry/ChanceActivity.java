@@ -67,7 +67,7 @@ public class ChanceActivity extends BaseActivity implements ChanceView {
     }
 
     private void initRecyclerView() {
-        mAdapter.register(ChanceModel.DataBean.ReportsBean.class, new ChanceBinder(getMyApplication().userData.getData().getUser().getStore().getId()+""));
+        mAdapter.register(ChanceModel.DataBean.ReportsBean.class, new ChanceBinder(getMyApplication().userData.getData().getUser().getStore().getId()+"",mStatus));
         mAdapter.setItems(mChances);
         RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerView.addItemDecoration(new ChanceItemDecoration());

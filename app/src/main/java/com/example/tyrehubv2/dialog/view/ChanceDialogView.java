@@ -9,4 +9,5 @@ public interface ChanceDialogView {
       void getDealManSuccess(List<ChanceDealDialog.Item> list);
       void saveDataSuccess();
       void getDealDataSuccess(DealDataModel data);
+      void SubmitDataSuccess();
 }

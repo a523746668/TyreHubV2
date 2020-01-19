@@ -1,5 +1,6 @@
 package com.example.tyrehubv2.dialog;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -25,15 +26,19 @@ import com.example.tyrehubv2.R;
 import com.example.tyrehubv2.View.binder.ChanceDialogBinder;
 import com.example.tyrehubv2.activiry.BaseActivity;
 import com.example.tyrehubv2.adapter.ChanceDialogSpinnerAdapter;
+import com.example.tyrehubv2.bean.ChanceDialogUpBean;
 import com.example.tyrehubv2.callback.BinderClickListener;
 import com.example.tyrehubv2.dialog.presenter.ChanceDialogPresenter;
 import com.example.tyrehubv2.dialog.view.ChanceDialogView;
 import com.example.tyrehubv2.model.DealDataModel;
+import com.example.tyrehubv2.util.DatePickerUtil;
 import com.example.tyrehubv2.util.KeyUtils;
 import com.lzy.okgo.cookie.store.SPCookieStore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,15 +79,19 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
     private Item content;
     private Item dealman;
     private BaseActivity mBaseActivity;
-
+    private boolean isChance=false; //是否是销售机会
+    private String price="";
+    private  List<Item> statuList ,contents,results;
+    private  MultiTypeAdapter statuAdapter,mcontentAdapter,resultAdapter;
     public ChanceDealDialog(@NonNull Context context) {
         super(context, R.style.exit_cast_activity_style);
     }
 
-    public ChanceDealDialog(@NonNull Context context, String chanceId, String store_id) {
+    public ChanceDealDialog(@NonNull Context context, String chanceId, String store_id,boolean isChance) {
         super(context,R.style.exit_cast_activity_style);
         this.chanceId = chanceId;
         this.store_id = store_id;
+        this.isChance=isChance;
     }
 
     @Override
@@ -95,10 +104,11 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
         mPresenter=new ChanceDialogPresenter(getContext(),this);
         initView();
         initData();
-
-
         mPresenter.getDealManList(store_id);
-        mPresenter.getChanceDealData(chanceId);
+        if(!isChance){
+            mPresenter.getChanceDealData(chanceId);
+        }
+
     }
 
     private void initView() {
@@ -109,11 +119,50 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
             }
         });
 
+        TVIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerUtil.showDatePickerDialog(getContext(), AlertDialog.THEME_HOLO_LIGHT,TVIntent, Calendar.getInstance(Locale.CHINA));
+            }
+        });
+
+        TVTransferTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerUtil.showDatePickerDialog(getContext(),AlertDialog.THEME_HOLO_LIGHT,TVTransferTime,Calendar.getInstance(Locale.CHINA));
+            }
+        });
+        View.OnClickListener submit=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                  SubmitInformation();
+            }
+        };
+        TVSure.setOnClickListener(submit);
+        TVUpdate.setOnClickListener(submit);
+
+    }
+
+    private void SubmitInformation() {
+         if(status==null||dealman==null||result==null||content==null){
+            return;
+         }
+         ChanceDialogUpBean data=new ChanceDialogUpBean();
+         data.status=status.value;
+         data.area=EtArea.getText()+"";
+         data.report_id=chanceId;
+         data.manage_staff=dealman.name;
+         data.results=result.value;
+         data.change_type=content.value;
+         data.change_amount=price;
+         data.changed_time=TVTransferTime.getText()+"";
+         data.intention_time=TVIntent.getText()+"";
+         mPresenter.SubmitChanceInformation(data);
+
     }
 
     private void initData() {
         LayoutInflater inflater=LayoutInflater.from(getContext());
-
 
         initSpstatu(inflater);
 
@@ -122,16 +171,10 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
         initSpcontent(inflater);
 
 
-
-
-
-
-
-
     }
 
     private void initSpcontent(LayoutInflater inflater) {
-        List<Item>  contents=mPresenter.getContentList();
+        contents=mPresenter.getContentList();
         PopupWindow contentWindow=new PopupWindow();
         SpContent.post(new Runnable() {
 
@@ -143,20 +186,20 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
         });
         View contentview= inflater.inflate(R.layout.chancepop,null);
         RecyclerView mRecyclerview=contentview.findViewById(R.id.popRecyclerview);
-        MultiTypeAdapter mAdapter=new MultiTypeAdapter();
-        mAdapter.register(Item.class,new ChanceDialogBinder(new BinderClickListener<Item>() {
+        mcontentAdapter=new MultiTypeAdapter();
+        mcontentAdapter.register(Item.class,new ChanceDialogBinder(new BinderClickListener<Item>() {
             @Override
             public void clickItem(Item data) {
                 mPresenter.refreshItemList(data,contents);
-                mAdapter.notifyDataSetChanged();
+                mcontentAdapter.notifyDataSetChanged();
                 contentWindow.dismiss();
                 content=data;
                 SpContent.setText(data.name);
             }
         }));
-        mAdapter.setItems(contents);
+        mcontentAdapter.setItems(contents);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerview.setAdapter(mAdapter);
+        mRecyclerview.setAdapter(mcontentAdapter);
         contentWindow.setContentView(contentview);
         SpContent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,7 +214,7 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
     }
 
     private void initSpresult(LayoutInflater inflater) {
-        List<Item>  results=mPresenter.getResultList();
+     results=mPresenter.getResultList();
         PopupWindow resultWindow=new PopupWindow();
         SpResult.post(new Runnable() {
             @Override
@@ -182,7 +225,7 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
         });
         View contentview= inflater.inflate(R.layout.chancepop,null);
         RecyclerView resultRecyclerview=contentview.findViewById(R.id.popRecyclerview);
-        MultiTypeAdapter resultAdapter=new MultiTypeAdapter();
+        resultAdapter=new MultiTypeAdapter();
         resultAdapter.register(Item.class,new ChanceDialogBinder(new BinderClickListener<Item>() {
             @Override
             public void clickItem(Item data) {
@@ -210,7 +253,7 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
     }
 
     private void initSpstatu(LayoutInflater inflater) {
-        List<Item> statuList = mPresenter.getStatuList();
+        statuList = mPresenter.getStatuList();
 
         PopupWindow statuWindow=new PopupWindow();
 
@@ -223,10 +266,17 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
         });
         View contentview= inflater.inflate(R.layout.chancepop,null);
         RecyclerView statuRecyclerview=contentview.findViewById(R.id.popRecyclerview);
-        MultiTypeAdapter statuAdapter=new MultiTypeAdapter();
+         statuAdapter=new MultiTypeAdapter();
         statuAdapter.register(Item.class,new ChanceDialogBinder(new BinderClickListener<Item>() {
             @Override
             public void clickItem(Item data) {
+                if(data.value.equalsIgnoreCase(KeyUtils.Chance_Track)){
+                    GroupTrack.setVisibility(View.VISIBLE);
+                    GroupFinish.setVisibility(View.GONE);
+                }else {
+                    GroupFinish.setVisibility(View.VISIBLE);
+                    GroupTrack.setVisibility(View.GONE);
+                }
                 mPresenter.refreshItemList(data,statuList);
                 statuAdapter.notifyDataSetChanged();
                 statuWindow.dismiss();
@@ -284,7 +334,7 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
                 mPresenter.refreshItemList(data,items);
                 mAdapter.notifyDataSetChanged();
                 mWindow.dismiss();
-                content=data;
+                dealman=data;
                 SpDealMan.setText(data.name);
             }
         }));
@@ -311,7 +361,43 @@ public class ChanceDealDialog extends Dialog implements ChanceDialogView {
 
     @Override
     public void getDealDataSuccess(DealDataModel data) {
+            DealDataModel.DataBean.ChanceBean bean= data.data.chance;
+             if(bean.status==null){
+                 this.dismiss();
+                 return;
+             }
 
+       status=new Item();
+       status.value=bean.status;
+       status.name= bean.status.equalsIgnoreCase(KeyUtils.Chance_Track)? getContext().getString(R.string.TxTTrackingChance):getContext().getString(R.string.TxTFinishedChance);
+       mPresenter.refreshItemList(status,statuList);
+       statuAdapter.notifyDataSetChanged();
+       SpStatus.setText(status.name);
+
+       result=new Item();
+       result.value=bean.results;
+       result.name=result.value.equalsIgnoreCase("intention")?getstr(R.string.TxTIntention):result.value.equalsIgnoreCase("transformed")?getstr(R.string.TxTTransformed): getstr(R.string.TxTDisagree);
+       mPresenter.refreshItemList(result,results);
+       resultAdapter.notifyDataSetChanged();
+       SpResult.setText(result.name);
+
+       content=new Item();
+       content.value=bean.change_type;
+       content.name= mPresenter.Itemname(content.value,contents);
+       mPresenter.refreshItemList(content,contents);
+       mcontentAdapter.notifyDataSetChanged();
+       SpContent.setText(content.name);
+
+
+    }
+
+    public String  getstr(int rid){
+         return  getContext().getString(rid);
+    }
+
+    @Override
+    public void SubmitDataSuccess() {
+        this.dismiss();
     }
 
 

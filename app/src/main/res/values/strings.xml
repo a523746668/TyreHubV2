@@ -70,4 +70,36 @@
     <string name="TxTBalance">动平衡</string>
     <string name="TxTOther">其他</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- 数据总览 -->
+    <string name="TxTSelectTime">选择时间查询</string>
+    <string name="TxTVehicleCheckingRate">查车率</string>
+    <string name="TxTFindChance">发现机会</string>
+    <string name="TxTChanceTrack">机会跟踪</string>
+    <string name="TxTTransferRate">转化率</string>
+    <string name="TxTToday">今天</string>
+    <string name="TxTYesterday">昨天</string>
+    <string name="TxTWeek">本周</string>
+    <string name="TxTMonth">本月</string>
+    <string name="TxTLastMonth">上月</string>
+    <string name="TxTYear">今年</string>
+    <string name="TxTDataOver">总体数据</string>
+    <string name="TxTDetailData">详细数据</string>
+    <string name="TxTTransferData">转化数据</string>
+    <string name="TxTDataFunner">数据漏斗</string>
+    <string name="TxTShopTrips">进店车次</string>
+    <string name="TxTCarCheckNum">查车数</string>
+    <string name="TxTChanceNum">机会数</string>
+    <string name="TxTTrackNum">跟踪数</string>
+    <string name="TxTTransferNum">转化数</string>
+    <string name="TxTUnTrack">未跟踪</string>
+    <string name="TxTUnit">辆</string>
+    <string name="TxTTime">时间</string>
+    <string name="TxTPlateNo">车牌</string>
+
+    <string name="TxTTireWear">轮胎磨损</string>
+    <string name="TxTNormal">良好状态</string>
+    <string name="TxTBorder">边界状态</string>
+    <string name="TxTImmediately">立即更换</string>
 </resources>

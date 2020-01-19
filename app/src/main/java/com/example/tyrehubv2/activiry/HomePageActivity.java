@@ -83,6 +83,7 @@ public class HomePageActivity extends BaseActivity implements HomePageView {
             @Override
             public void onClick(View view) {
                 Toast.makeText(HomePageActivity.this, "-----", 0).show();
+                DataOverActivity.start(HomePageActivity.this);
             }
         });
 

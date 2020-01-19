@@ -22,6 +22,12 @@ import java.util.List;
 public class ChanceBinder extends ItemViewBinder<ChanceModel.DataBean.ReportsBean, ChanceBinder.ChanceViewHolder> {
 
     private String store_id;
+    private String chanceStatu;
+
+    public ChanceBinder(String store_id, String chanceStatu) {
+        this.store_id = store_id;
+        this.chanceStatu = chanceStatu;
+    }
 
     public ChanceBinder(String store_id) {
         this.store_id = store_id;
@@ -47,7 +53,7 @@ public class ChanceBinder extends ItemViewBinder<ChanceModel.DataBean.ReportsBea
         viewHolder.deal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  new ChanceDealDialog(view.getContext(),String.valueOf(reportsBean.id),store_id).show();
+                  new ChanceDealDialog(view.getContext(),String.valueOf(reportsBean.id),store_id,chanceStatu=="chance"?true:false).show();
             }
         });
 

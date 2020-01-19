@@ -13,15 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activiry.SettingActivity"></activity>
-        <activity android:name=".activiry.ChanceActivity"
-             android:windowSoftInputMode="adjustPan"
-            />
+        <activity android:name=".activiry.DataOverActivity"></activity>
+        <activity android:name=".activiry.SettingActivity" />
+        <activity
+            android:name=".activiry.ChanceActivity"
+            android:windowSoftInputMode="stateUnspecified|adjustPan" />
         <activity android:name=".activiry.BaseActivity" />
         <activity android:name=".activiry.HomePageActivity" />
         <activity android:name=".activiry.LoginActivity" />
-        <activity android:name=".activiry.MainActivity"
-                   android:launchMode="singleTask">
+        <activity
+            android:name=".activiry.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

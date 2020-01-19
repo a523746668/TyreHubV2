@@ -1,15 +1,20 @@
 package com.example.tyrehubv2.dialog.presenter;
 
+import android.content.ClipData;
 import android.content.Context;
+import android.view.Display;
 
 import com.example.tyrehubv2.R;
+import com.example.tyrehubv2.bean.ChanceDialogUpBean;
 import com.example.tyrehubv2.callback.JsonCallback;
 import com.example.tyrehubv2.dialog.ChanceDealDialog;
 import com.example.tyrehubv2.dialog.view.ChanceDialogView;
 import com.example.tyrehubv2.model.DealDataModel;
 import com.example.tyrehubv2.model.DealManModel;
+import com.example.tyrehubv2.model.Model;
 import com.example.tyrehubv2.util.KeyUtils;
 import com.example.tyrehubv2.util.Urls;
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
@@ -61,6 +66,24 @@ public class ChanceDialogPresenter {
                    });
      }
 
+     public void SubmitChanceInformation(ChanceDialogUpBean data) {
+         String json=new Gson().toJson(data);
+         OkGo.<Model>post(Urls.Chance_Dialog_DealChance_Url)
+                     .upJson(json)
+                     .execute(new JsonCallback<Model>(mContext) {
+                         @Override
+                         public void onSuccess(Response<Model> response) {
+                                Model mode=response.body();
+                                if(mode!=null&&mode.code==0){
+                                    mView.SubmitDataSuccess();
+                                }else {
+
+                                }
+                         }
+                     });
+
+     }
+
 
     public List<ChanceDealDialog.Item> getStatuList(){
 
@@ -89,7 +112,7 @@ public class ChanceDialogPresenter {
         item2.value = valus[1];
         list.add(item2);
         ChanceDealDialog.Item item3 = new ChanceDealDialog.Item();
-        item3.name = mContext.getString(R.string.TxTFinishedChance);
+        item3.name = mContext.getString(R.string.TxTDisagree);
         item3.value = valus[2];
         list.add(item3);
 
@@ -150,6 +173,12 @@ public class ChanceDialogPresenter {
         return  strs;
     }
 
+    public String[] getContentname(){
+        String   []strs={mContext.getString(R.string.TxTTire1),mContext.getString(R.string.TxTTire2),mContext.getString(R.string.TxTTire3),mContext.getString(R.string.TxTTire4),mContext.getString(R.string.TxTAlignment),mContext.getString(R.string.TxTBalance),mContext.getString(R.string.TxTOther)};
+
+        return  strs;
+    }
+
     public void refreshItemList(ChanceDealDialog.Item data, List<ChanceDealDialog.Item> list){
            for(ChanceDealDialog.Item item:list){
                if(item.value.equalsIgnoreCase(data.value)){
@@ -162,4 +191,14 @@ public class ChanceDialogPresenter {
     }
 
 
+    public String Itemname(String value, List<ChanceDealDialog.Item> items) {
+        for(ChanceDealDialog.Item item:items){
+            if(value.equalsIgnoreCase(item.value)){
+            return  item.name;
+            }
+        }
+
+        return  items.get(0).name;
+
+    }
 }

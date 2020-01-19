@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activiry.DataOverActivity"
+    android:background="@color/colorWhite">
+
+
+    <com.example.tyrehubv2.View.HomeToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorWhite"
+        app:title="@string/TxTDataOver"
+        android:id="@+id/TitleBar"
+        >
+    </com.example.tyrehubv2.View.HomeToolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrayLine"
+        app:layout_constraintTop_toBottomOf="@id/TitleBar"
+        android:id="@+id/TvHLine"
+        ></TextView>
+
+     <TextView
+         android:layout_width="2dp"
+         android:layout_height="100dp"
+         android:id="@+id/TvVLine"
+         android:text="|||||||"
+         android:textColor="@color/colorBlack"
+         app:layout_constraintTop_toBottomOf="@id/TvHLine"
+         app:layout_constraintLeft_toRightOf="@id/TVTimeText"
+         android:singleLine="false"
+         android:lines="5"
+         android:layout_marginLeft="10dp"
+
+         ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TxTSelectTime"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/DataOverTv1"
+        app:layout_constraintTop_toBottomOf="@id/TvHLine"
+        android:id="@+id/TVTimeText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"
+
+        ></TextView>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/TVSelectTime"
+       app:layout_constraintLeft_toLeftOf="@id/TVTimeText"
+       app:layout_constraintBottom_toBottomOf="@id/TvVLine"
+       android:text="@string/TxTToday"
+       android:drawableRight="@mipmap/_open"
+       android:textSize="@dimen/DataOverTv1"
+       android:gravity="center_horizontal"
+       android:padding="15dp"
+       style="@style/tv_click"
+       ></TextView>
+
+   <LinearLayout
+       android:layout_width="0dp"
+       android:layout_height="50dp"
+       app:layout_constraintLeft_toRightOf="@id/TvVLine"
+       app:layout_constraintTop_toBottomOf="@id/TitleBar"
+       app:layout_constraintRight_toRightOf="parent"
+
+       >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TxTVehicleCheckingRate"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        ></TextView>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/TxTFindChance"
+           android:layout_weight="1"
+           android:gravity="center_horizontal"
+           ></TextView>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/TxTChanceTrack"
+           android:layout_weight="1"
+           android:gravity="center_horizontal"
+
+           ></TextView>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/TxTTransferRate"
+           android:layout_weight="1"
+           android:gravity="center_horizontal"
+           ></TextView>
+
+   </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toRightOf="@id/TvVLine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/TvVLine"
+        android:gravity="bottom"
+        android:paddingBottom="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVCheckRate"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVFindChanceRate"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVTrackChanceRate"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVTransferRate"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            ></TextView>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrayLine"
+        app:layout_constraintTop_toBottomOf="@id/TvVLine"
+        android:id="@+id/TvHLine1"
+        ></TextView>
+
+<com.google.android.material.tabs.TabLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mTabLayout"
+    app:layout_constraintTop_toBottomOf="@id/TvVLine"
+    app:tabIndicatorColor="@color/colorYellow"
+    ></com.google.android.material.tabs.TabLayout>
+
+
+
+ <FrameLayout
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     android:id="@+id/mFragmentLayout"
+     app:layout_constraintTop_toBottomOf="@id/mTabLayout"
+     app:layout_constraintBottom_toBottomOf="parent"
+     >
+ </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
