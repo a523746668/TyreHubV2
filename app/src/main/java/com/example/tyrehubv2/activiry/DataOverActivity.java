@@ -10,15 +10,25 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drakeet.multitype.MultiTypeAdapter;
 import com.example.tyrehubv2.R;
 import com.example.tyrehubv2.View.HomeToolbar;
 
+import com.example.tyrehubv2.View.binder.item.DropBinder;
+import com.example.tyrehubv2.activiry.View.DataOverView;
+import com.example.tyrehubv2.activiry.present.DataOverPresenter;
+import com.example.tyrehubv2.callback.BinderClickListener;
 import com.example.tyrehubv2.fragment.AllDataFragment;
 import com.example.tyrehubv2.fragment.ChanceDataFragment;
 import com.example.tyrehubv2.fragment.TransferDataFragment;
+import com.example.tyrehubv2.model.AllDataModel;
+import com.example.tyrehubv2.model.DetailDataModel;
+import com.example.tyrehubv2.model.Item;
+import com.example.tyrehubv2.model.TransformDetailModel;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -29,7 +39,7 @@ import butterknife.ButterKnife;
 
 
 //数据总览
-public class DataOverActivity extends BaseActivity {
+public class DataOverActivity extends BaseActivity  implements DataOverView{
     @BindView(R.id.TitleBar)
     HomeToolbar TitleBar;
     @BindView(R.id.TVSelectTime)
@@ -50,12 +60,13 @@ public class DataOverActivity extends BaseActivity {
     private ChanceDataFragment mChanceDataFragment;
     private TransferDataFragment mTransferDataFragment;
     private FragmentManager fragmentManager;//定义一个fragmentManager
-    private List<TabItem> tabItems = new ArrayList<>(3);
-    private List<TabItem> mTimes=new ArrayList<>();
-    private TabItem mSelectTab;
-    private TabItem mSelectTime;
-    private TabItem mSelectStore;
+    private List<Item> tabItems = new ArrayList<>(3);
+    private List<Item> mTimes=new ArrayList<>();
+    private Item mSelectTab;
+    private Item mSelectTime;
+    private Item mSelectStore;
     private MultiTypeAdapter mTimeAdater;
+    private DataOverPresenter mPresenter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, DataOverActivity.class);
@@ -76,20 +87,38 @@ public class DataOverActivity extends BaseActivity {
                 finish();
             }
         });
+        initFragment();
+
+        mPresenter=new DataOverPresenter(this,this);
+        mPresenter.getTotalDataForTime(mSelectTime);
     }
 
-    private void initTimeRecyclerview() {
+    private void initFragment() {
+         fragmentManager=getSupportFragmentManager();
+         mAllDataFragment=new AllDataFragment();
+         mChanceDataFragment=new ChanceDataFragment();
+         mTransferDataFragment=new TransferDataFragment();
+         FragmentTransaction ft=fragmentManager.beginTransaction();
+         ft.add(R.id.mFragmentLayout,mAllDataFragment);
+         ft.add(R.id.mFragmentLayout,mChanceDataFragment);
+         ft.add(R.id.mFragmentLayout,mTransferDataFragment);
+         ft.show(mAllDataFragment);
+         ft.hide(mChanceDataFragment);
+         ft.hide(mTransferDataFragment);
+         ft.commit();
 
     }
+
 
     private void initTabLayout() {
-        TabItem item1 = new TabItem();
+        Item item1 = new Item();
         item1.name = getStr(R.string.TxTDataOver);
-        item1.value = "chance";
-        TabItem item2 = new TabItem();
+        item1.value = "total";
+        mSelectTab=item1;
+        Item item2 = new Item();
         item2.name = getStr(R.string.TxTDetailData);
-        item2.value = "total";
-        TabItem item3 = new TabItem();
+        item2.value = "chance";
+        Item item3 = new Item();
         item3.name = getStr(R.string.TxTTransferData);
         item3.value = "transeform";
         tabItems.add(item1);
@@ -109,8 +138,26 @@ public class DataOverActivity extends BaseActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(com.google.android.material.tabs.TabLayout.Tab tab) {
-                TabItem item= (TabItem) tab.getTag();
-                getSelectTabData(item);
+                Item item= (Item) tab.getTag();
+                if(item.value.equalsIgnoreCase(mSelectTab.value)) return;
+                mSelectTab=item;
+                FragmentTransaction ft=fragmentManager.beginTransaction();
+                if(item.value.equalsIgnoreCase("total")){
+                    ft.show(mAllDataFragment);
+                    ft.hide(mChanceDataFragment);
+                    ft.hide(mTransferDataFragment);
+                    ft.commit();
+                }else if(item.value.equalsIgnoreCase("chance")){
+                    ft.hide(mAllDataFragment);
+                    ft.show(mChanceDataFragment);
+                    ft.hide(mTransferDataFragment);
+                    ft.commit();
+                }else {
+                    ft.hide(mAllDataFragment);
+                    ft.hide(mChanceDataFragment);
+                    ft.show(mTransferDataFragment);
+                    ft.commit();
+                }
 
             }
 
@@ -128,32 +175,35 @@ public class DataOverActivity extends BaseActivity {
 
     }
 
-    private void getSelectTabData(TabItem item) {
-        TabItem item1 = new TabItem();
+
+    private void initTimeRecyclerview() {
+
+        Item item1 = new Item();
         item1.name = getStr(R.string.TxTToday);
         item1.value = "today";
+        mSelectTime=item1;
         mTimes.add(item1);
-        TabItem item2 = new TabItem();
+        Item item2 = new Item();
         item2.name = getStr(R.string.TxTYesterday);
         item2.value = "yesterday";
         mTimes.add(item2);
 
-        TabItem item3 = new TabItem();
+        Item item3 = new Item();
         item3.name = getStr(R.string.TxTWeek);
         item3.value = "week";
         mTimes.add(item3);
 
-        TabItem item4 = new TabItem();
+        Item item4 = new Item();
         item4.name = getStr(R.string.TxTMonth);
         item4.value = "month";
         mTimes.add(item4);
 
-        TabItem item5 = new TabItem();
+        Item item5 = new Item();
         item5.name = getStr(R.string.TxTLastMonth);
         item5.value = "last_month";
         mTimes.add(item5);
 
-        TabItem item6 = new TabItem();
+        Item item6 = new Item();
         item6.name = getStr(R.string.TxTYear);
         item6.value = "year";
         mTimes.add(item6);
@@ -162,20 +212,87 @@ public class DataOverActivity extends BaseActivity {
         TVSelectTime.post(new Runnable() {
             @Override
             public void run() {
-               timeWindow.setWidth(TVSelectTime.getWidth());
-               timeWindow.setHeight(TVSelectTime.getHeight()*6);
+                timeWindow.setWidth(TVSelectTime.getWidth());
+                timeWindow.setHeight(TVSelectTime.getHeight()*6);
             }
         });
 
         View contentview= LayoutInflater.from(DataOverActivity.this).inflate(R.layout.chancepop,null);
         RecyclerView recyclerView=contentview.findViewById(R.id.popRecyclerview);
-         mTimeAdater=new MultiTypeAdapter();
+        mTimeAdater=new MultiTypeAdapter();
+        mTimeAdater.register(com.example.tyrehubv2.model.Item.class,new DropBinder(new BinderClickListener<com.example.tyrehubv2.model.Item>() {
+            @Override
+            public void clickItem(com.example.tyrehubv2.model.Item data) {
+                refreshItemList(data,mTimes);
+                mSelectTime=data;
+                mTimeAdater.notifyDataSetChanged();
+                TVSelectTime.setText(mSelectTime.name);
+                timeWindow.dismiss();
+
+            }
+        }));
+        mTimeAdater.setItems(mTimes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(DataOverActivity.this));
+        recyclerView.setAdapter(mTimeAdater);
+        timeWindow.setContentView(contentview);
+        TVSelectTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 if(timeWindow.isShowing()) {
+                    timeWindow.dismiss();
+                 }else {
+                     timeWindow.showAsDropDown(TVSelectTime);
+                 }
+            }
+        });
+    }
+
+
+    private void getSelectTabData(Item item) {
+
+
+
 
     }
 
-    public static class TabItem {
-        public String name;
-        public String value;
+
+    public void refreshItemList(Item data, List<Item> list){
+        for(Item item:list){
+            if(item.value.equalsIgnoreCase(data.value)){
+                item.selected=true;
+            }else {
+                item.selected=false;
+            }
+        }
+
     }
 
+    public String calculate100(int i,int j){
+        return            (int)(i/j *100) +"%";
+
+    }
+
+
+    @Override
+    public void getAllDataSuccess(AllDataModel data) {
+        if(data.data!=null){
+
+        }
+
+    }
+
+    @Override
+    public void getChanceDataSuccess(DetailDataModel data) {
+
+    }
+
+    @Override
+    public void getTransferDataSuccess(TransformDetailModel data) {
+
+    }
+
+    @Override
+    public void getTransferTrendDataSuccess(AllDataModel data) {
+
+    }
 }

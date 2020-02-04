@@ -7,11 +7,13 @@ import android.text.TextUtils;
 import com.example.tyrehubv2.activiry.BaseActivity;
 import com.example.tyrehubv2.model.UserDetail;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -19,11 +21,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MyApplication extends Application {
-    public String  mToken=null;
-    public static String DEVICE_MODEL="michelin.tyrescan.ts003";
-    public static String APP_VERSION="1.1.2";
-    public UserDetail  userData;  //用户信息
-    public List<BaseActivity> activities=new ArrayList<>();
+    public String mToken = null;
+    public static String DEVICE_MODEL = "michelin.tyrescan.ts003";
+    public static String APP_VERSION = "1.1.2";
+    public UserDetail userData;  //用户信息
+    public List<BaseActivity> activities = new ArrayList<>();
 
     public String getmToken() {
         return mToken;
@@ -41,22 +43,27 @@ public class MyApplication extends Application {
     }
 
     private void initNetWork() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
+        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
+        //log颜色级别，决定了log在控制台显示的颜色
+        loggingInterceptor.setColorLevel(Level.INFO);
+
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
 
-                if(!TextUtils.isEmpty(mToken)){
+                if (!TextUtils.isEmpty(mToken)) {
 
-                   return  chain.proceed(request.newBuilder().addHeader("Authorization",mToken).build());
+                    return chain.proceed(request.newBuilder().addHeader("Authorization", mToken).build());
                 }
                 return chain.proceed(request);
             }
-        }).build();
+        }).addInterceptor(loggingInterceptor).build();
         HttpHeaders headers = new HttpHeaders();
-        headers.put("Device-Model",DEVICE_MODEL);
-        headers.put("App-Version",APP_VERSION);
+        headers.put("Device-Model", DEVICE_MODEL);
+        headers.put("App-Version", APP_VERSION);
         OkGo.getInstance().init(this).setOkHttpClient(client).addCommonHeaders(headers);
     }
 

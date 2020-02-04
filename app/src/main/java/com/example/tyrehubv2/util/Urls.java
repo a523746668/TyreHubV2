@@ -9,5 +9,9 @@ public class Urls {
      public static String Chance_Dialog_DealMan_Url=Base_Url+"api/chance/staff/";
      public static String Chance_Dialog_DealData_Url=Base_Url+"api/chance/statu/";
      public static String Chance_Dialog_DealChance_Url=Base_Url+"api/chance/handel/";
+     public static String DataOver_Total_data=Base_Url+"api/stores/stats/summary/";
+     public static String DataOver_Chance_data=Base_Url+"api/stores/stats/inspect/";
+     public static String DataOver_Transfer_data=Base_Url+"api/stores/stats/transforms/";
+
 
 }
